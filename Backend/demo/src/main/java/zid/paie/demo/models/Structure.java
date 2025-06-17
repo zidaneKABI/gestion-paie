@@ -15,6 +15,8 @@ public class Structure {
     @Id
     private Long idstructure;
     private String Libelle;
+    
+    
     private Structure structureparente;
 
     @OneToMany(mappedBy = "structure",cascade = CascadeType.ALL)
