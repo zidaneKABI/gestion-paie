@@ -1,7 +1,11 @@
 package zid.paie.demo.models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -12,6 +16,9 @@ public class Structure {
     private Long idstructure;
     private String Libelle;
     private Structure structureparente;
+
+    @OneToMany(mappedBy = "structure",cascade = CascadeType.ALL)
+    private List<Employe> employes;
 
 
 }
