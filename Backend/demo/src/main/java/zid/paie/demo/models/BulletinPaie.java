@@ -1,13 +1,16 @@
 package zid.paie.demo.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -30,5 +33,8 @@ public class BulletinPaie {
     @ManyToOne
     @JoinColumn(name = "lotpaieId", nullable = false)
     private LotPaie lotpaie;
+
+    @OneToMany(mappedBy = "bulletinPaie", cascade = CascadeType.ALL )
+    private List<Detaillbulletin> detaillbulletins;
 
 }
