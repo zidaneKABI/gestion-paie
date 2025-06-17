@@ -23,7 +23,7 @@ public class LotPaie {
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
-    @OneToMany(mappedBy = "lotPaie", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lotpaie", cascade = CascadeType.ALL)
     private List<BulletinPaie> bulletins;
     
 }

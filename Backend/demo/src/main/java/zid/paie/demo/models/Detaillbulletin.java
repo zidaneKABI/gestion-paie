@@ -19,7 +19,9 @@ public class Detaillbulletin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
     private Rubrique rubrique; // ex : "Salaire de base", "CNSS", "IRG"
+    
     private Double taux;
     private Double base;
     private Double montantdonner;
