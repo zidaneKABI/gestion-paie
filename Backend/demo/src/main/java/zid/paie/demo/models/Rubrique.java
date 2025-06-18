@@ -15,12 +15,13 @@ public class Rubrique {
     @GeneratedValue(strategy = GenerationType.IDENTITY)   
     private Long id;
     
-    private String code;
-    private String libelle;
-    private String sens;
-    private String active;
-    private String typerubrique;
-    private String categorie;
+    private String  code;
+    private String  libelle;
+    private String  sens;
+    private String  active;
+    private String  typerubrique;
+    private String  categorie;
+    private Integer Ordre;
 
 
 }

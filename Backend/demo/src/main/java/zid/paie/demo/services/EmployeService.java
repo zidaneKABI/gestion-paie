@@ -21,8 +21,11 @@ public class EmployeService {
 
         public Employe createEmploye(EmployeDTO empoyedto) {
           
-        Structure structure = structureRepository.getReferenceById(empoyedto.getStructureId());
-        Postetravail postetravail = postTravailRepository.getReferenceById(empoyedto.getPostetravailId());
+            Structure structure = structureRepository.findById(empoyedto.getStructureId()).orElseThrow(
+                    () -> new RuntimeException("La structure demandée n'existe pas"));
+            
+
+            Postetravail postetravail = postTravailRepository.findById(empoyedto.getPostetravailId()).orElseThrow(()-> new RuntimeException("Le poste de travail n'existe pas"));
         
         Employe employe = new Employe();
         employe.setAdresse_1(empoyedto.getAdresse_1());
