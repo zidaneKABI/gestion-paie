@@ -20,6 +20,7 @@ public class Detaillbulletin {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "rubriqueId", nullable = false)
     private Rubrique rubrique; // ex : "Salaire de base", "CNSS", "IRG"
     
     private Double taux;
