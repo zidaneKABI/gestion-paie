@@ -36,7 +36,7 @@ public class Employe {
      private Date      datenaissance;
      private String    adresse_1;
      private String    sexe;
-     private String  codefilschahid;
+     
      private Date    daterecrutement;
      private String  nss;
      private String stituationfamille;
@@ -49,12 +49,9 @@ public class Employe {
      private String  pathphoto;
      private String  matricule;
      private String  telephone;
-     private String  ensurefectif;
+     
      private byte[]  photo;
      private Double  distance;
      private String  coderecrutement;
-     private String  gsp;
-     private BigDecimal   aideetat;
-     private String       activesdtc;
-
+     
 }

@@ -28,7 +28,6 @@ public class Detaillbulletin {
     private Double montantdonner;
     private Double montantretenir;
     
-
     @ManyToOne
     @JoinColumn(name = "bulletin_paie_id",nullable = false)
     private BulletinPaie bulletinPaie;
