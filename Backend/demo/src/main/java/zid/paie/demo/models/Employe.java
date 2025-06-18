@@ -1,6 +1,5 @@
 package zid.paie.demo.models;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -28,7 +27,11 @@ public class Employe {
      @ManyToOne
      @JoinColumn(name="StructureId", nullable = false)
      private Structure structure;
-     
+      
+     @ManyToOne  
+     @JoinColumn(name = "PosttravailId", nullable = false)
+     private Postetravail postetravail;
+
      @NotBlank(message = "le nom ne peut pas être vide")
      private String nom;
      @NotBlank(message = "le nom ne peut pas être vide")

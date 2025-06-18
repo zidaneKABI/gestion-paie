@@ -1,6 +1,5 @@
 package zid.paie.demo.models;
 
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
