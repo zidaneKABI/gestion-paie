@@ -19,27 +19,34 @@ public class EmployeService {
         private final StructureRepository structureRepository;
         private final PostTravailRepository postTravailRepository;
 
-        public Employe createEmploye(EmployeDTO empoyedto) {
+        public Employe createEmploye(EmployeDTO employedto) {
           
-            Structure structure = structureRepository.findById(empoyedto.getStructureId()).orElseThrow(
+            Structure structure = structureRepository.findById(employedto.getStructureId()).orElseThrow(
                     () -> new RuntimeException("La structure demandée n'existe pas"));
             
 
-            Postetravail postetravail = postTravailRepository.findById(empoyedto.getPostetravailId()).orElseThrow(()-> new RuntimeException("Le poste de travail n'existe pas"));
+            Postetravail postetravail = postTravailRepository.findById(employedto.getPostetravailId()).orElseThrow(()-> new RuntimeException("Le poste de travail n'existe pas"));
         
         Employe employe = new Employe();
-        employe.setAdresse_1(empoyedto.getAdresse_1());
-        employe.setCodeirg(empoyedto.getCodeirg());
-        employe.setCodepaie(empoyedto.getCodepaie());
-        employe.setCoderecrutement(empoyedto.getCoderecrutement());
-        employe.setDistance(empoyedto.getDistance());
-        employe.setMatricule(empoyedto.getMatricule());
-        employe.setNom(empoyedto.getNom());
-        employe.setNss(empoyedto.getNss());
-        employe.setPathphoto(empoyedto.getPathphoto());
+        employe.setAdresse_1(employedto.getAdresse_1());
+        employe.setCodeirg(employedto.getCodeirg());
+        employe.setCodepaie(employedto.getCodepaie());
+        employe.setCoderecrutement(employedto.getCoderecrutement());
+        employe.setDistance(employedto.getDistance());
+        employe.setMatricule(employedto.getMatricule());
+        employe.setNom(employedto.getNom());
+        employe.setPrenom(employedto.getPrenom());
+        employe.setNss(employedto.getNss());
+        employe.setPathphoto(employedto.getPathphoto());
         employe.setPostetravail(postetravail);
         employe.setStructure(structure);
+        employe.setSexe(employedto.getSexe());
+        employe.setDaterecrutement(employedto.getDaterecrutement());
+        employe.setDatenaissance(employedto.getDatenaissance());
+        employe.setTelephone(employedto.getTelephone());
+        employe.setStituationfamille(employedto.getStituationfamille());
 
+        System.out.println("------------------------------------ "+employedto.toString());
         return employeRepository.save(employe);
     }
 

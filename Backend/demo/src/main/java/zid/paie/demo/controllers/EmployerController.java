@@ -1,7 +1,6 @@
 package zid.paie.demo.controllers;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +15,7 @@ import zid.paie.demo.services.EmployeService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "/employes")
+@RequestMapping("/employes")
 public class EmployerController {
 
 

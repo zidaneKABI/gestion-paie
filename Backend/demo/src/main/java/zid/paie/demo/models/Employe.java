@@ -2,6 +2,7 @@ package zid.paie.demo.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,8 @@ public class Employe {
      @NotNull(message = "La structure ne peux pas être null")
      
      @ManyToOne
-     @JoinColumn(name="StructureId", nullable = false)
+     @JoinColumn(name = "StructureId", nullable = false)
+     @JsonBackReference
      private Structure structure;
       
      @ManyToOne  
@@ -42,9 +44,9 @@ public class Employe {
      
      private Date    daterecrutement;
      private String  nss;
-     private String stituationfamille;
+     private String  stituationfamille;
      
-     private String codeirg;
+     private String  codeirg;
      
      @Positive(message = "le code paie doit être positif")
      @NotBlank(message = "le code paie doit être rensigné")

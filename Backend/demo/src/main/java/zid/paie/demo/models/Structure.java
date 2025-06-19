@@ -2,6 +2,8 @@ package zid.paie.demo.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,7 +20,8 @@ public class Structure {
     
     
    
-    @OneToMany(mappedBy = "structure",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "structure", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Employe> employes;
 
 
