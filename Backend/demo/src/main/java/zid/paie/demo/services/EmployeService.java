@@ -1,6 +1,11 @@
 package zid.paie.demo.services;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import lombok.RequiredArgsConstructor;
 import zid.paie.demo.dto.EmployeDTO;
@@ -19,6 +24,18 @@ public class EmployeService {
         private final StructureRepository structureRepository;
         private final PostTravailRepository postTravailRepository;
 
+        
+        
+        
+        public List<Employe> liteEmployes() {
+            
+
+            return employeRepository.findAll();
+
+        }
+        
+        
+        
         public Employe createEmploye(EmployeDTO employedto) {
           
             Structure structure = structureRepository.findById(employedto.getStructureId()).orElseThrow(
@@ -49,5 +66,42 @@ public class EmployeService {
         System.out.println("------------------------------------ "+employedto.toString());
         return employeRepository.save(employe);
     }
+
+
+
+    public Optional<Employe> getEmploye(Long id) {
+        // TODO Auto-generated method stub
+        return this.employeRepository.findById(id);
+    }
+
+
+
+    public boolean deleteEmploye(Long id) {
+        
+        Optional<Employe> employe = employeRepository.findById(id);
+
+        if(employe.isPresent())
+        {
+            employeRepository.deleteById(employe.get().getIdemployer());
+            return true;
+
+        }
+        else
+        return false;
+
+        
+
+
+
+}
+
+
+
+public Employe modiferEmploye(Employe e) {
+    // TODO Auto-generated method stub
+    return this.employeRepository.save(e);
+
+}
+
 
 }
