@@ -1,0 +1,54 @@
+
+<mat-toolbar color="primary" >
+    <button type="button" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer-toolbar" ></span>
+    <div class="bouton-toolbar" >
+    <button type="button" 
+            mat-button 
+            [matMenuTriggerFor]="menuref"  >
+            <mat-icon  iconPositionEnd  >subject</mat-icon>
+            Import</button>
+    <mat-menu #menuref>
+        <button  type="button"  mat-menu-item >charger Employé</button>
+        <button  type="button"  mat-menu-item >CHarger Structure</button>
+        <button  type="button" mat-menu-item >Charger poste Travail</button>
+    </mat-menu>
+    <button type="button" mat-button   >Profil</button>
+    <button type="button" mat-raised-button  color="accent" >Logout</button>
+    </div>
+
+</mat-toolbar>
+
+<mat-drawer-container>
+
+<mat-drawer opened="true" mode="side" position="start" >
+
+<mat-list>
+    <mat-list-item>
+    <button mat-button type="button">Employé</button>
+
+    </mat-list-item>
+
+    <mat-list-item>
+    <button mat-button type="button">Structure</button>
+
+    </mat-list-item>
+    <mat-list-item>
+    <button mat-button type="button">Bulletins de Paie</button>
+
+    </mat-list-item>
+    </mat-list>
+
+  </mat-drawer>
+
+    <mat-drawer-content>
+     <div  class="drawer-content-class" >
+
+    </div>
+
+
+    </mat-drawer-content>
+
+</mat-drawer-container>
