@@ -62,9 +62,6 @@ public class EmployeService {
         employe.setDaterecrutement(employedto.getDaterecrutement());
         employe.setDatenaissance(employedto.getDatenaissance());
         employe.setTelephone(employedto.getTelephone());
-        //employe.setStituationfamille(employedto.getStituationfamille());
-
-        System.out.println("------------------------------------ "+employedto.toString());
         return employeRepository.save(employe);
     }
 
@@ -85,9 +82,9 @@ public class EmployeService {
             employeRepository.deleteById(employe.get().getIdemployer());
             return true;
 
-        }
+        } 
         else
-        return false;
+            return false;
 
         
 
@@ -98,7 +95,6 @@ public class EmployeService {
 
 
 public Employe modiferEmploye(Employe e) {
-    // TODO Auto-generated method stub
     return this.employeRepository.save(e);
 
 }
