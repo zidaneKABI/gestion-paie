@@ -26,16 +26,10 @@ public class EmployeDTO {
     private String sexe;
     private Date   daterecrutement;
     private String nss;
-    private String stituationfamille;
-    private String codeirg;
-
-    @NotBlank
-    private String codepaie;
-
+   
     private String pathphoto;
     private String matricule;
     private String telephone;
-    private Double distance;
-    private String coderecrutement;
-
+   
+   
 }

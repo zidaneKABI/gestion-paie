@@ -96,9 +96,6 @@ public class EmployerController {
         return ResponseEntity.notFound().build();
     }
     
-
-
-
     private EmployeDTO mapToDTO(Employe e) {
     EmployeDTO dto = new EmployeDTO();
     dto.setStructureId(e.getStructure().getIdstructure());
@@ -110,15 +107,16 @@ public class EmployerController {
     dto.setSexe(e.getSexe());
     dto.setDaterecrutement(e.getDaterecrutement());
     dto.setNss(e.getNss());
-    dto.setStituationfamille(e.getStituationfamille());
-    dto.setCodeirg(e.getCodeirg());
-    dto.setCodepaie(e.getCodepaie());
+   // dto.setStituationfamille(e.getStituationfamille());
+   // dto.setCodeirg(e.getCodeirg());
+   // dto.setCodepaie(e.getCodepaie());
     dto.setPathphoto(e.getPathphoto());
     dto.setMatricule(e.getMatricule());
     dto.setTelephone(e.getTelephone());
-    dto.setDistance(e.getDistance());
-    dto.setCoderecrutement(e.getCoderecrutement());
-    return dto;
-    }
+   // dto.setDistance(e.getDistance());
+   // dto.setCoderecrutement(e.getCoderecrutement());
+   return dto;
+    
+   }
 
 }

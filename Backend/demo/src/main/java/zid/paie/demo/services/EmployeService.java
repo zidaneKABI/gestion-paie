@@ -3,9 +3,7 @@ package zid.paie.demo.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import lombok.RequiredArgsConstructor;
 import zid.paie.demo.dto.EmployeDTO;
@@ -46,10 +44,13 @@ public class EmployeService {
         
         Employe employe = new Employe();
         employe.setAdresse_1(employedto.getAdresse_1());
-        employe.setCodeirg(employedto.getCodeirg());
-        employe.setCodepaie(employedto.getCodepaie());
-        employe.setCoderecrutement(employedto.getCoderecrutement());
+        
+        /**  employe.setCodeirg(employedto.getCodeirg());
+        // employe.setCodepaie(employedto.getCodepaie());
+        // employe.setCoderecrutement(employedto.getCoderecrutement());
         employe.setDistance(employedto.getDistance());
+        */
+        
         employe.setMatricule(employedto.getMatricule());
         employe.setNom(employedto.getNom());
         employe.setPrenom(employedto.getPrenom());
@@ -61,7 +62,7 @@ public class EmployeService {
         employe.setDaterecrutement(employedto.getDaterecrutement());
         employe.setDatenaissance(employedto.getDatenaissance());
         employe.setTelephone(employedto.getTelephone());
-        employe.setStituationfamille(employedto.getStituationfamille());
+        //employe.setStituationfamille(employedto.getStituationfamille());
 
         System.out.println("------------------------------------ "+employedto.toString());
         return employeRepository.save(employe);
@@ -70,7 +71,6 @@ public class EmployeService {
 
 
     public Optional<Employe> getEmploye(Long id) {
-        // TODO Auto-generated method stub
         return this.employeRepository.findById(id);
     }
 
