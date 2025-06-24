@@ -22,6 +22,78 @@ margin-right: 8px;
 
 }
 
+.titre-centre {
+  position: relative;
+  color: blue;
+  top: 20px;
+  text-align: center;
+  display: block; /* important car <mat-card-title> est inline par défaut */
+  width: 100%;     /* pour que le centrage fonctionne correctement */
+}
+
+
+.actions-button {
+  display: flex;              /* Flexbox pour un meilleur contrôle */
+  justify-content: flex-start; /* Aligne les boutons à gauche */
+  align-items: center;
+  gap: 5px;                   /* Espace horizontal entre les boutons */
+}
+
+mat-card-header {
+  top: 20px;
+  background-color: rgb(243, 197, 189);
+  border-radius: 2%;
+  margin-bottom: 10px; /* ou 8px, selon ton besoin */
+  flex-direction: column;
+  align-items: flex-start;
+  left:20px;
+ 
+ 
+}
+
+.container-form{
+  display:  inline-block ;
+  align-items: stretch;
+  width: 100%;
+}
+
+.container-form div  {
+  display:  flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.container-form div mat-radio-group {
+  display:  flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.container-form div mat-label {
+  display:  flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.container-form div mat-form-field  {
+  margin-left: 8px;
+  width: 100%;
+}
+.container-form div button  {
+  margin-left: 8px;
+  width: 100%;
+}
+mat-form-field {
+  margin-left: 8px;
+  
+}
+.full-width {
+  width: 100%;
+}
+
+
+
+
 
 .drawer-content-class{
    

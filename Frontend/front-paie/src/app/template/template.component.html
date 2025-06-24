@@ -27,20 +27,22 @@
 
 <mat-list>
     <mat-list-item>
-    <button mat-button type="button">
+    <button mat-button
+        [routerLink]="['/employes']" 
+        type="button">
         <mat-icon>supervised_user_circle</mat-icon>
         Employé</button>
 
     </mat-list-item>
 
     <mat-list-item>
-    <button mat-button type="button">
+    <button [routerLink]="['/addemploye']"  mat-button type="button">
         <mat-icon>view_quilt</mat-icon>
         Structure</button>
 
     </mat-list-item>
     <mat-list-item>
-    <button mat-button type="button">
+    <button mat-button   type="button">
         <mat-icon>payment</mat-icon>
         Bulletins de Paie</button>
 
@@ -51,8 +53,8 @@
 
     <mat-drawer-content>
      <div  class="drawer-content-class" >
-
-    </div>
+         <router-outlet></router-outlet>
+     </div>
 
 
     </mat-drawer-content>

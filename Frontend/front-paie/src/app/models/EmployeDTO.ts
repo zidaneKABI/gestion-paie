@@ -1,18 +1,19 @@
 export interface EmployeDto{
 
-    nom :string;
+    structureId: number;
+    postetravailId: number;
+    nom: string;
     prenom : string;
     datenaissance: Date;
     email: string;
     adresse_1: string;
     sexe : string;
-    daterecrutement : Date;
+    daterecrutement: Date;
+    pathphoto: string;
     nss :Date;
     matricule : string;
     telephone: string;
-    coderecrutement:Date;
-
-
+   
 
 
 }

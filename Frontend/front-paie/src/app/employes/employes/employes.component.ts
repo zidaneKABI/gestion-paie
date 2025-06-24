@@ -1,37 +1,68 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { EmployeDto } from '../../models/EmployeDTO';
-import { EmployeServiceService } from '../../services/employe-service.service';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
+  standalone: true,
   selector: 'app-employes',
-  imports: [MatCardModule,
-           MatTableModule
+  imports: [
+    CommonModule,RouterLink,MatButtonModule,MatCheckboxModule,
+    HttpClientModule,  MatButtonModule,// ← Import indispensable ici !
+    MatTableModule,MatIconModule,MatIconModule,
+    MatCardModule,MatPaginatorModule,MatSortModule
   ],
   templateUrl: './employes.component.html',
-  styleUrl: './employes.component.css'
+  styleUrls: ['./employes.component.css']
 })
 export class EmployesComponent implements OnInit {
-
-  private readonly employeservice = inject(EmployeServiceService);
-  public datasource: any;
+onDelete(_t76: any) {
+throw new Error('Method not implemented.');
+}
+onEdit(_t76: any) {
+throw new Error('Method not implemented.');
+}
   public employes!: EmployeDto[];
-
-  public displayedColumns  : string[] = ['matricule','nom', 'prenom', 'email', 'datenaissance', 'daterecrutement','sexe','nss','telephone'];
+  public displayedColumns = ['matricule', 'nom', 'prenom', 'telephone','nss','actions'];
+  public datasource!: MatTableDataSource<EmployeDto>;
   
-    
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) matsort!: MatSort;
+  private readonly apiUrl = 'http://localhost:8081/employes';
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
    
-  ngOnInit(): void {
-
-    this.employeservice.getEmployes().subscribe({
-      next: data => { this.employes = data }
-      ,
-      error: () => console.log("erreur de recuperation des employés")
-
-    });
-      
   }
+  
+  constructor( private http: HttpClient){}
+  ngOnInit(): void
+  {
+      this.http.get<EmployeDto[]>(this.apiUrl).subscribe({
+      next: (data: EmployeDto[]) => {
+          this.employes = data;
+          this.datasource = new MatTableDataSource(this.employes);
+          this.datasource.paginator = this.paginator;
+          this.datasource.sort = this.matsort;
+           
+        },
+      error: err => {
+        console.error('Erreur récupération employés', err);
+      }
+    });
+  }
+
+
+
+
 
 
 

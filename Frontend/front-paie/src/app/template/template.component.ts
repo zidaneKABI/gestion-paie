@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatSidenavModule} from '@angular/material/sidenav'
 import { MatListModule} from '@angular/material/list'
+import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-template',
   imports: [MatToolbarModule,
@@ -12,7 +13,7 @@ import { MatListModule} from '@angular/material/list'
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule, RouterLink,RouterOutlet
    ],
   templateUrl: './template.component.html',
   styleUrl: './template.component.css'
