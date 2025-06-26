@@ -2,6 +2,7 @@ package zid.paie.demo.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
@@ -26,13 +27,47 @@ public class EmployeService {
         
         
         public List<Employe> liteEmployes() {
-            
 
             return employeRepository.findAll();
 
         }
         
+        public boolean ifEmployeExistBymatricule(String matricule)
+        {
+            Optional<Employe> employe = employeRepository.findByMatricule(matricule);
+
+            if (employe.isPresent())
+                return true;
+            else
+            return false;
+        }
         
+        public String getMatricule( String nom)
+        {
+            return Fonctions.generateMatricule(nom);
+        }
+        
+         private String GenerateMatricule(String nom)
+         {
+            
+            if (nom == null || nom.isEmpty())
+             {
+                 throw new IllegalArgumentException();
+             }
+            
+             char premiereLettre = Character.toUpperCase(nom.charAt(0));
+             Random random = new Random();
+             StringBuilder nombreSansZero = new StringBuilder();
+
+            // Génère 5 chiffres aléatoires entre 1 et 9
+            for (int i = 0; i < 5; i++) 
+            {
+            int chiffre = random.nextInt(9) + 1; // entre 1 et 9
+            nombreSansZero.append(chiffre);
+            }
+
+            return premiereLettre + nombreSansZero.toString();
+          }
         
         public Employe createEmploye(EmployeDTO employedto) {
           
@@ -45,12 +80,10 @@ public class EmployeService {
         Employe employe = new Employe();
         employe.setAdresse_1(employedto.getAdresse_1());
         
-        /**  employe.setCodeirg(employedto.getCodeirg());
-        // employe.setCodepaie(employedto.getCodepaie());
-        // employe.setCoderecrutement(employedto.getCoderecrutement());
+        employe.setCodeirg(employedto.getCodeirg());
+        employe.setCodepaie(employedto.getCodepaie());
+        employe.setCoderecrutement(employedto.getCoderecrutement());
         employe.setDistance(employedto.getDistance());
-        */
-        
         employe.setMatricule(employedto.getMatricule());
         employe.setNom(employedto.getNom());
         employe.setPrenom(employedto.getPrenom());

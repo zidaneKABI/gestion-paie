@@ -3,32 +3,29 @@
         <mat-card-title>Création d'un Employé</mat-card-title>
         </mat-card-header>
     <mat-card-content  >
-     <form  [formGroup]="employeform"  (ngSubmit)="creationEmploye()" >
+     
+     
+        
+      <form  [formGroup]="employeform"  (ngSubmit)="creationEmploye()" >
     
     
           
     <div class="container-form">
          
-    <div>
-          <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Structure ID</mat-label>
-          <input matInput type="number" formControlName="structureId">
-          </mat-form-field>
       
-         <mat-form-field class="full-width" appearance="outline">
-         <mat-label>Poste Travail ID</mat-label>
-        <input matInput type="number" formControlName="postetravailId">
-        </mat-form-field>
-
-        </div>
+       
+    
+    
+    
+     
         
       <div>
-        <mat-form-field class="full-width" >
+        <mat-form-field  appearance="outline"  >
         <mat-label>Nom</mat-label>
         <input matInput formControlName="nom">
       </mat-form-field>
 
-      <mat-form-field class="full-width" >
+      <mat-form-field class="full-width" appearance="outline" >
       <mat-label>Prénom</mat-label>
       <input matInput formControlName="prenom">
       </mat-form-field>
@@ -36,13 +33,13 @@
    
 
 <div> 
-<mat-form-field class="full-width" >
-        <mat-label>NSS</mat-label>
-        <input matInput type="text" formControlName="nss">
+         <mat-form-field class="full-width" appearance="outline" >
+        <mat-label>Nss</mat-label>
+        <input  matInput  formControlName="nss">
   </mat-form-field>
  
   
-  <mat-form-field class="full-width" >
+  <mat-form-field  class="full-width" >
         <mat-label>Matricule</mat-label>
         <input matInput type="text" formControlName="matricule">
   </mat-form-field>
@@ -94,11 +91,51 @@
     </div>
      
 
-
+    
 
       
      
     </div>
+ 
+  <div>  
+  
+  <mat-form-field appearance="outline"  >
+          <mat-label>Structure ID</mat-label>
+             <mat-select formControlName="structureId" >
+             <mat-option *ngFor="let structure of structures" [value]="structure.idstructure">
+             {{ structure.libelle}}
+              </mat-option>
+             </mat-select>
+ </mat-form-field>
+
+    <mat-form-field  appearance="outline" >
+         <mat-label>Poste Travail ID</mat-label>
+        <mat-select formControlName="postetravailId">
+        @for (poste of postetravails; track poste) {
+          <mat-option  [value]="poste.id" >
+            {{poste.libelle}} - {{poste.base}}
+          </mat-option>
+        }
+
+        </mat-select>
+        </mat-form-field>
+
+
+      <mat-form-field  appearance="outline" >
+         <mat-label>Code Paie</mat-label>
+        <mat-select formControlName="codepaie">
+        @for (codep of Codepaies; track codep) {
+          <mat-option  [value]="codep" >
+            {{codep}}
+          </mat-option>
+        }
+
+        </mat-select>
+        </mat-form-field>
+
+    </div>
+    
+    
     
     <div>
     <button type="submit"   mat-raised-button >
@@ -107,6 +144,13 @@
    
     </div>
 
+
+   
+
     </form>
+
+    
+
+   
     </mat-card-content>
     </mat-card>

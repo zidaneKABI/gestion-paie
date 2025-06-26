@@ -15,4 +15,10 @@ export class EmployeServiceService {
     console.log("Je vais aller récuperer la liste des employés");
     return this.http.get<EmployeDto[]>(this.apiUrl);
   }
+
+  getavailableMatricule(nom:string): Observable<string>{
+   
+    return this.http.get(`${this.apiUrl}/matricule/${nom}`, { responseType: "text" });
+ }
+
 }

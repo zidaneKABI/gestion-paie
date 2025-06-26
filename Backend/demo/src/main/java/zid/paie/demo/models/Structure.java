@@ -2,6 +2,7 @@ package zid.paie.demo.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -22,6 +23,7 @@ public class Structure {
    
     @OneToMany(mappedBy = "structure", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private List<Employe> employes;
 
 

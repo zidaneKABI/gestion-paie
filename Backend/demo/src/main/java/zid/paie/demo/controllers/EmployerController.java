@@ -83,6 +83,26 @@ public class EmployerController {
         }
     
     
+
+        @GetMapping("/matricule/{nom}")
+        public ResponseEntity<String> getMatricule(@PathVariable String nom)
+        {
+            
+            String mat ="";
+            
+            int i = 0;
+            // Régéneration du matricule tant qu'il existe dans la base de données 
+            // Pas plus de 1000 tentative pour éviter une boucle infinie.
+            do 
+            {
+                mat = employeService.getMatricule(nom);
+                i++;
+            } while (employeService.ifEmployeExistBymatricule(mat) && i< 1000);
+
+
+            return ResponseEntity.ok(mat);
+        }
+
     
     
     @GetMapping("/{id}")

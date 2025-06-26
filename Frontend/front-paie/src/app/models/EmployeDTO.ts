@@ -13,6 +13,11 @@ export interface EmployeDto{
     nss :Date;
     matricule : string;
     telephone: string;
+    codeirg: string;
+    codepaie: string;
+    distance: number,
+    stituationfamille: string,
+    coderecrutement :string
    
 
 

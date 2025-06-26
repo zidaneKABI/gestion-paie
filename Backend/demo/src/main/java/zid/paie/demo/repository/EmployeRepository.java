@@ -9,8 +9,8 @@ import zid.paie.demo.models.Employe;
 public interface EmployeRepository  extends JpaRepository<Employe,Long>   {
 
     
-    Optional<Employe> getEmployeByMatricule(String matricule);
-
+    Optional<Employe> findByMatricule(String matricule);
+   
 
 
 }

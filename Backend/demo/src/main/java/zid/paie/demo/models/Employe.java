@@ -12,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+
 import lombok.Data;
 
 @Entity
@@ -48,7 +48,7 @@ public class Employe {
      
      private String  codeirg;
      
-     @Positive(message = "le code paie doit être positif")
+     
      @NotBlank(message = "le code paie doit être rensigné")
      private String  codepaie;
      private String  pathphoto;

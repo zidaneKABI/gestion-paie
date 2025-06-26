@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl,FormsModule, FormGroup, Validators } from '@angular/forms';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -10,16 +10,25 @@ import { MatIconModule ,MatIcon} from '@angular/material/icon';
 import {MatRadioModule } from '@angular/material/radio';
 import { EmployeDto } from '../../models/EmployeDTO';
 import { HttpClient } from '@angular/common/http';
+import { StructureServiceService } from '../../services/structure-service.service';
+import { Structure } from '../../models/Structure';
+import { MatSelect,MatSelectModule} from '@angular/material/select'
+import { CommonModule } from '@angular/common';
+import { PosteTravail } from '../../models/PosteTravail';
+import { PostetravailServiceService } from '../../services/postetravail-service.service';
+import { Codepaie } from '../../models/Codepaie';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { EmployeServiceService } from '../../services/employe-service.service';
 @Component({
   selector: 'app-add-employe',
-  imports: [MatCardModule,MatIconModule,MatRadioModule,
+  imports: [MatCardModule,MatIconModule,MatRadioModule,MatSelectModule,CommonModule,FormsModule,
     MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule, MatButtonModule],
   templateUrl: './add-employe.component.html',
   styleUrl: './add-employe.component.css'
 })
 export class AddEmployeComponent implements OnInit {
   
-  
+  private readonly apiUrl = 'http://localhost:8081/employes';
   
   
   
@@ -41,46 +50,145 @@ export class AddEmployeComponent implements OnInit {
         matricule: data.matricule,
         email: data.email,
         sexe: data.sexe,
-        pathphoto : ''
+        pathphoto: '',
+        distance: 0,
+        codeirg: '1',
+        codepaie: '1',
+        stituationfamille: '',
+        coderecrutement:''
+        
       };
       
-      
+      //  - Envoyer de l'objet construit au backend avec la méthode poste
+
+        this.http.post(this.apiUrl, employe).subscribe({
+        next: (response) => { console.log("L'employé a été enregistré avec succés",response) },
+        error: (error) =>   { console.log("Erreur lors de l'enregistrement de l'employé",error)}
+     });
       
       console.log("EMPLOYE DATA :", employe);
-    }
+    } 
     else
     {
-      console.log("Formulaire INvalide");
+      console.log("Formulaire Invalide");
       this.employeform.markAllAsTouched();
     }
     
 }
 
   employeform!: FormGroup;
-
-  constructor(private fb: FormBuilder, private http :HttpClient) { }
+  structures: Structure[]=[];
+  postetravails: PosteTravail[] = []
+  Codepaies: string[] = [];
   
+  private readonly posteTravailserive = inject(PostetravailServiceService);
+  private readonly employeservice = inject(EmployeServiceService)
+
+  constructor(private fb: FormBuilder, private http :HttpClient, private structureservice : StructureServiceService) { }
+  
+  structure =new FormControl<Structure | null>(null, Validators.required);
+      
+  private dernirePremireletre: string | null = null;       
 
   ngOnInit(): void {
     
-      this.employeform   = this.fb.group({
-      structureId: [null, Validators.required],
-      postetravailId: [null, Validators.required],
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      datenaissance: [null, Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      adresse_1: ['', Validators.required],
-      sexe: ['', Validators.required],
-      daterecrutement: [null, Validators.required],
-      pathphoto: [''],
-      nss: [null, Validators.required],
-      matricule: ['', Validators.required],
-      telephone: ['', Validators.required]
+    // Récuperation des valeurs à partir de l'énumeration Code paie    
+      for (let elem in Codepaie) {
+      if (typeof Codepaie[elem] === 'string')
+      this.Codepaies.push(Codepaie[elem]);
+    
+      }
+    
+      //Récupération de la liste des postes de travail via API REST
+      this.posteTravailserive.getPostetravail().subscribe(
+      {
+        next: data => {
+          this.postetravails = data;
+          console.log("la liste des poste de travail a été récupérée", this.postetravails);
+        },
+        error: error => console.log("Erreur à la récupération des poste de travail", error)
 
+      }
 
-
+    )
+    // Récuparation de la liste des structures Via à API REST
+    this.structureservice.getStructure().subscribe({
+      next: data => {
+        this.structures = data;
+        console.log("La liste des strcutures est :", this.structures);
+         
+        this.structures.forEach(element => {
+          console.log(element.libelle);
+        });
+      },
+      error: error => console.log("Impossible de récuéperer la liste des structures")
+      
     });
+
+    
+   
+      // Initialisation des champs de ReactiveForm de l'employé
+      this.employeform = this.fb.group({
+      structureId: [2, Validators.required],
+      postetravailId: [2, Validators.required],
+      nom: ['KABI', Validators.required],
+      prenom: ['ZIDANE', Validators.required],
+      datenaissance: [null, Validators.required],
+      email: ['zidane.kabi@gamil.com', [Validators.required, Validators.email]],
+      adresse_1: ['19 rue du collége', Validators.required],
+      sexe: ['Homme', Validators.required],
+      daterecrutement: [null, Validators.required],
+      pathphoto: ['1'],
+      nss: ['111111', Validators.required],
+      matricule: ['111', Validators.required],
+      telephone: ['075304581', Validators.required],
+      codeirg: ['1'],
+      codepaie: ['1'],
+      distance: ['1']
+     
+      });
+    
+    
+    // inscription d'un événements pour le champs nom valueChange
+    //
+      this.employeform.get('nom')?.valueChanges.pipe(
+      debounceTime(500),                  // attend 500ms après la dernière saisie
+      distinctUntilChanged(),             // ignore si la même valeur est resaisie
+      filter(nom => nom!==null) // ignore les valeurs vides
+      ).subscribe( nom => {
+      
+          if (nom.length > 0)  {
+        
+          const premierelettre = nom.charAt(0).toUpperCase();
+        
+          if (premierelettre  !==  this.dernirePremireletre)
+          {
+        
+            this.dernirePremireletre = premierelettre;
+
+            this.employeservice.getavailableMatricule(nom).subscribe({
+            next: data => {
+              this.employeform.patchValue({ matricule: data })
+            },
+            error: e => console.error("impossible de générer le matricule", e)
+          
+            })
+
+
+          }
+  
+        }
+        else
+         {
+         this.dernirePremireletre = null;
+         this.employeform.patchValue({ matricule: '' });
+         }
+
+
+      });
+          
+    
+    
   }
 
   formatDate(date: Date): string {
@@ -89,6 +197,11 @@ export class AddEmployeComponent implements OnInit {
   const mois = String(d.getMonth() + 1).padStart(2, '0');
   const annee = d.getFullYear();
   return `${jour}/${mois}/${annee}`;
+  }
+  
+  getStructureLibelle(): string | undefined {
+  const id = this.employeform.get('structureId')?.value;
+  return this.structures.find(s => s.idstructure === id)?.libelle;
 }
 
 }

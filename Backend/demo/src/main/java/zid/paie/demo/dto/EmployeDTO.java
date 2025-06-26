@@ -30,6 +30,9 @@ public class EmployeDTO {
     private String pathphoto;
     private String matricule;
     private String telephone;
-   
+    private String codepaie;
+    private String codeirg;
+    private String coderecrutement;
+    private double distance;   
    
 }
