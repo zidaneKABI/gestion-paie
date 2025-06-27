@@ -100,3 +100,14 @@ mat-form-field {
     min-height: 600px;
 
 }
+
+.snackbar-success {
+  top: 0%;
+  background-color: #4caf50; /* vert */
+  color: white;
+}
+
+.snackbar-error {
+  background-color: #f44336; /* rouge */
+  color: white;
+}

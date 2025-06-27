@@ -124,7 +124,7 @@
       <mat-form-field  appearance="outline" >
          <mat-label>Code Paie</mat-label>
         <mat-select formControlName="codepaie">
-        @for (codep of Codepaies; track codep) {
+        @for (codep of codepaies; track codep) {
           <mat-option  [value]="codep" >
             {{codep}}
           </mat-option>
@@ -132,6 +132,19 @@
 
         </mat-select>
         </mat-form-field>
+
+        <mat-form-field  appearance="outline" >
+        <mat-label>Code IRG</mat-label>
+        <mat-select formControlName="codeirg">
+        @for (irg of codeirgs; track irg) {
+          <mat-option  [value]="irg" >
+            {{irg}}
+          </mat-option>
+        }
+
+        </mat-select>
+        </mat-form-field>
+
 
     </div>
     

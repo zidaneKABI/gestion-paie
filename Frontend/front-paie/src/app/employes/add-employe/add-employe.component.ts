@@ -19,6 +19,8 @@ import { PostetravailServiceService } from '../../services/postetravail-service.
 import { Codepaie } from '../../models/Codepaie';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { EmployeServiceService } from '../../services/employe-service.service';
+import { Codeirg } from '../../models/Codeirg';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-employe',
   imports: [MatCardModule,MatIconModule,MatRadioModule,MatSelectModule,CommonModule,FormsModule,
@@ -48,22 +50,39 @@ export class AddEmployeComponent implements OnInit {
         telephone: data.telephone,
         adresse_1: data.adresse_1,
         matricule: data.matricule,
-        email: data.email,
-        sexe: data.sexe,
+        email:  data.email,
+        sexe:   data.sexe,
         pathphoto: '',
         distance: 0,
-        codeirg: '1',
-        codepaie: '1',
+        codeirg:  data.codeirg,
+        codepaie: data.codepaie,
         stituationfamille: '',
         coderecrutement:''
         
-      };
+        };
       
       //  - Envoyer de l'objet construit au backend avec la méthode poste
 
         this.http.post(this.apiUrl, employe).subscribe({
-        next: (response) => { console.log("L'employé a été enregistré avec succés",response) },
-        error: (error) =>   { console.log("Erreur lors de l'enregistrement de l'employé",error)}
+          next: (response) =>
+          {
+            console.log("L'employé a été enregistré avec succés", response);
+            this.snackbar.open('Employé enregistré avec succès !', 'Fermer', {
+            duration: 5000, // 3 secondes
+            panelClass: ['snackbar-success'], // classe CSS personnalisée (optionnel)
+            });
+            this.employeform.reset();
+           },
+            error: (error) => {
+            console.log("Erreur lors de l'enregistrement de l'employé", error); 
+            
+          this.snackbar.open('Erreur lors de l\'enregistrement', 'Fermer', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
+
+
+          }
      });
       
       console.log("EMPLOYE DATA :", employe);
@@ -79,12 +98,15 @@ export class AddEmployeComponent implements OnInit {
   employeform!: FormGroup;
   structures: Structure[]=[];
   postetravails: PosteTravail[] = []
-  Codepaies: string[] = [];
-  
+  codepaies: string[] = [];
+  codeirgs: string[] = [];  
   private readonly posteTravailserive = inject(PostetravailServiceService);
   private readonly employeservice = inject(EmployeServiceService)
 
-  constructor(private fb: FormBuilder, private http :HttpClient, private structureservice : StructureServiceService) { }
+  constructor(private fb: FormBuilder,
+             private  http: HttpClient,
+             private  structureservice: StructureServiceService,
+             private  snackbar : MatSnackBar) { }
   
   structure =new FormControl<Structure | null>(null, Validators.required);
       
@@ -92,10 +114,25 @@ export class AddEmployeComponent implements OnInit {
 
   ngOnInit(): void {
     
+
+    //récuperation des valeurs code irg à partir de l'énumeration
+    
+    for(let elem in Codeirg)
+    {
+      console.log("CODE IRG" + elem);
+      if (typeof Codeirg[elem] === 'string')
+        this.codeirgs.push(Codeirg[elem]);
+
+    }
+
+    this.codeirgs.forEach(element => {
+      console.log("VALEUR :" + element);      
+    });
+
     // Récuperation des valeurs à partir de l'énumeration Code paie    
       for (let elem in Codepaie) {
       if (typeof Codepaie[elem] === 'string')
-      this.Codepaies.push(Codepaie[elem]);
+      this.codepaies.push(Codepaie[elem]);
     
       }
     
@@ -117,7 +154,7 @@ export class AddEmployeComponent implements OnInit {
         this.structures = data;
         console.log("La liste des strcutures est :", this.structures);
          
-        this.structures.forEach(element => {
+         this.structures.forEach(element => {
           console.log(element.libelle);
         });
       },
