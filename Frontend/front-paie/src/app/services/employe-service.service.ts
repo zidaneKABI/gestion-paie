@@ -16,9 +16,14 @@ export class EmployeServiceService {
     return this.http.get<EmployeDto[]>(this.apiUrl);
   }
 
-  getavailableMatricule(nom:string): Observable<string>{
+ getavailableMatricule(nom:string): Observable<string>{
    
-    return this.http.get(`${this.apiUrl}/matricule/${nom}`, { responseType: "text" });
+ return this.http.get(`${this.apiUrl}/matricule/${nom}`, { responseType: "text" });
  }
 
+ deleteEmploye(id: number): Observable<any>{
+   
+    return this.http.delete(`${this.apiUrl}/${id}`);
+ } 
+  
 }

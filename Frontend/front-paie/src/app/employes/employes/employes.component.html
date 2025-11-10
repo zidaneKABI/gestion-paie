@@ -51,10 +51,10 @@
       <button  mat-icon-button color="primary"  [routerLink]="['/addemploye']" (click)="onEdit(element)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="onDelete(element)">
+      <button mat-icon-button color="warn" (click)="onDelete(element.id)">
       <mat-icon>delete</mat-icon>
       </button>
-      <button mat-icon-button color="dark" (click)="onDelete(element)">
+      <button mat-icon-button color="dark" (click)="onDelete(element.id)">
       <mat-icon>print</mat-icon>
       </button>
       

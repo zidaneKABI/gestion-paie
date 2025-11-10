@@ -22,7 +22,7 @@ import zid.paie.demo.services.StructureService;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://frontend:4200")
 @RequestMapping("/structures")
 public class StructureController {
 

@@ -40,6 +40,7 @@ export class AddEmployeComponent implements OnInit {
         console.log("Les données envoyées sont :", this.employeform.value);
         const data = this.employeform.value;
         const employe: EmployeDto = {
+        id: 0,
         structureId: data.structureId,
         postetravailId: data.postetravailId,
         nom: data.nom,

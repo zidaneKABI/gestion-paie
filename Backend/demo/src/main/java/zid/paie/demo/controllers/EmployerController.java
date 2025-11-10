@@ -25,7 +25,7 @@ import zid.paie.demo.models.Employe;
 import zid.paie.demo.services.EmployeService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://frontend:4200")
 @RequiredArgsConstructor
 @RequestMapping("/employes")
 public class EmployerController {
@@ -119,7 +119,8 @@ public class EmployerController {
     }
     
     private EmployeDTO mapToDTO(Employe e) {
-    EmployeDTO dto = new EmployeDTO();
+        EmployeDTO dto = new EmployeDTO();
+    dto.setId(e.getIdemployer());
     dto.setStructureId(e.getStructure().getIdstructure());
     dto.setPostetravailId(e.getPostetravail().getId()); // si tu en as un
     dto.setNom(e.getNom());

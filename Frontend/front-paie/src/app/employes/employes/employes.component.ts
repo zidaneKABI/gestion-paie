@@ -6,10 +6,11 @@ import { MatCardModule } from '@angular/material/card';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { EmployeDto } from '../../models/EmployeDTO';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import {  MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EmployeServiceService } from '../../services/employe-service.service';
 @Component({
   standalone: true,
   selector: 'app-employes',
@@ -23,12 +24,35 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   styleUrls: ['./employes.component.css']
 })
 export class EmployesComponent implements OnInit {
-onDelete(_t76: any) {
-throw new Error('Method not implemented.');
+
+
+onDelete(id: number) {
+   
+  console.log("ID EMPLOYE = ", id);
+
+this.employeService.deleteEmploye(id).subscribe(
+    
+    {
+    next: () => {
+      
+        console.log("Employé Supprimé avec succés");
+        this.employes = this.employes.filter(e => e.id !== id);
+        this.datasource.data = this.employes;
+     } 
+      ,
+    error: () => { console.log("Erreur à la supression de l'employé"); }
+      
+
+    }
+
+
+  );
 }
 onEdit(_t76: any) {
 throw new Error('Method not implemented.');
-}
+  }
+  
+  private readonly employeService = inject(EmployeServiceService)
   public employes!: EmployeDto[];
   public displayedColumns = ['matricule', 'nom', 'prenom', 'telephone','nss','actions'];
   public datasource!: MatTableDataSource<EmployeDto>;

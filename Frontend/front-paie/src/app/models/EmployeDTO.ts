@@ -1,5 +1,5 @@
 export interface EmployeDto{
-
+    id: number;
     structureId: number;
     postetravailId: number;
     nom: string;

@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class EmployeDTO {
 
+    private Long id;
     @NotNull
     private Long structureId;
 
