@@ -13,7 +13,7 @@ import zid.paie.demo.services.PosteTravailService;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins="http://frontend:4200")
+@CrossOrigin(origins="*")
 @RequestMapping("/postetravails")
 public class PosteTravailController {
 

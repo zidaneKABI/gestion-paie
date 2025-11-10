@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { StructureServiceService } from './structure-service.service';
 
+
 describe('StructureServiceService', () => {
   let service: StructureServiceService;
 

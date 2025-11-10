@@ -21,6 +21,8 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { EmployeServiceService } from '../../services/employe-service.service';
 import { Codeirg } from '../../models/Codeirg';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-add-employe',
   imports: [MatCardModule,MatIconModule,MatRadioModule,MatSelectModule,CommonModule,FormsModule,
@@ -30,7 +32,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddEmployeComponent implements OnInit {
   
-  private readonly apiUrl = 'http://localhost:8081/employes';
+  private readonly apiUrl = `${environment.apiUrl}/employes`;
   
   
   

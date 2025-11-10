@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PosteTravail } from '../models/PosteTravail';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostetravailServiceService {
 
-   private readonly apiUrl = 'http://localhost:8081/postetravails';
+   private readonly apiUrl = `${environment.apiUrl}/postetravails`;
 
 
 

@@ -11,6 +11,9 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EmployeServiceService } from '../../services/employe-service.service';
+import { environment } from '../../../environments/environment';
+
+
 @Component({
   standalone: true,
   selector: 'app-employes',
@@ -59,7 +62,7 @@ throw new Error('Method not implemented.');
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) matsort!: MatSort;
-  private readonly apiUrl = 'http://localhost:8081/employes';
+  private readonly apiUrl = `${environment.apiUrl}/employes`;
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.

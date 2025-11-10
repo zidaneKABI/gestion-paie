@@ -25,7 +25,7 @@ import zid.paie.demo.models.Employe;
 import zid.paie.demo.services.EmployeService;
 
 @RestController
-@CrossOrigin(origins = "http://frontend:4200")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/employes")
 public class EmployerController {

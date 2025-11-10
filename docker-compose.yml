@@ -13,12 +13,37 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-
+  backend:
+    build: ./Backend/demo
+    container_name: backend
+  #
+    ports:
+      - "8282:8080"
+    depends_on:
+      - mysql
+  
+  frontend:
+    build: ./Frontend/front-paie
+    container_name: frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+      
   adminer:
     image: adminer
     container_name: adminer
     ports:
       - "8484:8080"
+    depends_on:
+      - mysql
 
 volumes:
   mysql_data:
+    name: mysql_data_gestion_paie
+  
+  
+networks:
+  default:
+    name: reseau_gestion_paie
+    driver: bridge
