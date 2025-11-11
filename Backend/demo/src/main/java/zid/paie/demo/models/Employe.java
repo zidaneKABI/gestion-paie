@@ -39,14 +39,14 @@ public class Employe {
      @NotBlank(message = "le nom ne peut pas être vide")
      private String    prenom;
      private Date      datenaissance;
-     private String    adresse_1;
+     private String    adresse;
      private String    sexe;
      
-     private Date    daterecrutement;
-     private String  nss;
-     private String  stituationfamille;
+     private Date     daterecrutement;
+     private String   nss;
+     private String   stituationfamille;
      
-     private String  codeirg;
+     private String   codeirg;
      
      
      @NotBlank(message = "le code paie doit être rensigné")

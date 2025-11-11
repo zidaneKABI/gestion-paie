@@ -19,10 +19,11 @@ public class LotPaie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String libelle; // ex : "Juin 2025"
+    private String    libelle; // ex : "Juin 2025"
     private LocalDate dateDebut;
     private LocalDate dateFin;
-
+    private Integer   jourouvrable ; // ex : "OUVERT", "CLOS", "VALIDE"
+    private String    statut;
     @OneToMany(mappedBy = "lotpaie", cascade = CascadeType.ALL)
     private List<BulletinPaie> bulletins;
     

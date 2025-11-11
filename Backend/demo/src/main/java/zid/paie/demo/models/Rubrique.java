@@ -12,16 +12,17 @@ import lombok.Data;
 public class Rubrique {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)   
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
+    private Long    id;
     private String  code;
     private String  libelle;
     private String  sens;
+    private String  formule;
     private String  active;
     private String  typerubrique;
     private String  categorie;
-    private Integer Ordre;
+    private Integer ordre;
 
 
 }

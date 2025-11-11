@@ -35,11 +35,9 @@ public class EmployeService {
         public boolean ifEmployeExistBymatricule(String matricule)
         {
             Optional<Employe> employe = employeRepository.findByMatricule(matricule);
-
-            if (employe.isPresent())
-                return true;
-            else
-            return false;
+            
+            return employe.isPresent();
+            
         }
         
         public String getMatricule( String nom)
@@ -78,7 +76,7 @@ public class EmployeService {
             Postetravail postetravail = postTravailRepository.findById(employedto.getPostetravailId()).orElseThrow(()-> new RuntimeException("Le poste de travail n'existe pas"));
         
         Employe employe = new Employe();
-        employe.setAdresse_1(employedto.getAdresse_1());
+        employe.setAdresse(employedto.getAdresse());
         
         employe.setCodeirg(employedto.getCodeirg());
         employe.setCodepaie(employedto.getCodepaie());

@@ -23,7 +23,7 @@ public class EmployeDTO {
     private String prenom;
 
     private Date   datenaissance;
-    private String adresse_1;
+    private String adresse;
     private String sexe;
     private Date   daterecrutement;
     private String nss;
