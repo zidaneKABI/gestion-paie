@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 
@@ -23,6 +24,8 @@ public class Rubrique {
     private String  typerubrique;
     private String  categorie;
     private Integer ordre;
-
+    
+    @OneToMany(mappedBy = "rubrique")
+    private java.util.List<EmployeRubrique> employeRubriques;
 
 }

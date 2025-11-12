@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -33,6 +34,11 @@ public class Employe {
      @ManyToOne  
      @JoinColumn(name = "PosttravailId", nullable = false)
      private Postetravail postetravail;
+
+     @OneToMany(mappedBy = "employe")
+     private java.util.List<EmployeRubrique> employeRubriques;
+
+    
 
      @NotBlank(message = "le nom ne peut pas être vide")
      private String nom;
