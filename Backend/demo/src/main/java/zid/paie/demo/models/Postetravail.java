@@ -18,6 +18,7 @@ public class Postetravail {
     private String Libelle;
 
     private Double Base;
+    
     private String Categorie;
     private Long echellon;
 
